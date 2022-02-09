@@ -197,10 +197,10 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
               {% include 'shared/create_collection_modal.html' %}
               {% include 'shared/checkout_confirmation_modal.html' %}
             </div>
-            
+
             <!-- Sticky checkout for ETH -->
             <div v-if="grantsCountByTenant.ETH !== undefined" class="bg-white border-grey border-top-2 bottom-0 px-2 py-4 position-sticky text-center w-100 d-block d-md-none">
-              <eth-checkout-button 
+              <eth-checkout-button
                 :active-checkout="activeCheckout"
                 :on-polygon-update="onPolygonUpdate"
                 :on-zk-sync-update="onZkSyncUpdate"
@@ -243,16 +243,16 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
             <button class="btn p-0 checkout-logo" id='js-fundGrants-button'
               @click="standardCheckout" :disabled="activeCheckout !== undefined || grantsUnderMinimalContribution.length > 0"
             >
-    
+
               <svg width="13" height="20" viewBox="0 0 13 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M12.7231 10.1875L6.36364 13.8125L0 10.1875L6.36364 0L12.7231 10.1875ZM6.36364 14.9766L0 11.3516L6.36364 20L12.7273 11.3516L6.36364 14.9766Z" fill="#0E0333"/>
               </svg>
-    
+
               Standard Checkout
             </button>
           </div>
         </b-dropdown-item-button>
-    
+
         <!-- CHECKOUT WITH POLYGON -->
         <b-dropdown-item-button v-if="!isPolygonDown">
           <grants-cart-ethereum-polygon
@@ -277,7 +277,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
               </svg>
               Polygon Checkout
             </button>
-    
+
               <!-- Modal shown when clicking button -->
               <b-modal
                 id="polygon-modal" :visible="polygon.showModal"
@@ -297,7 +297,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </template>
-    
+
                 <!-- Main content -->
                 <template v-slot:default="{ hide }">
                   <div class="px-4 pb-4 mb-5">
@@ -307,7 +307,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
                         <!-- Header -->
                         <img class="mb-4" src="{% static 'v2/images/grants/polygon.svg' %}" alt="Polygon Logo" width="150">
                         <h2 class="mt-2 text-left">Pay with Polygon (Matic)</h2>
-    
+
                         <div class="text-left mt-2">
                           <h3 class="font-subheader">What is Polygon (Matic)?</h3>
                           <p>
@@ -326,7 +326,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
                         Deposit Funds
                       </button>
                     </div>
-    
+
                     <!-- If user should deposit -->
                     <div v-if="polygon.checkoutStatus === 'depositing'">
                       <div class="px-4">
@@ -351,16 +351,16 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
                         </button>
                       </div>
                     </div>
-    
+
                     <!-- If checkout is pending -->
-    
+
                   </div>
                 </template>
               </b-modal>
             </div>
           </grants-cart-ethereum-polygon>
         </b-dropdown-item-button>
-    
+
         <!-- CHECKOUT WITH ZKSYNC -->
         <b-dropdown-item-button v-if="!isZkSyncDown">
           <grants-cart-ethereum-zksync
@@ -387,7 +387,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
                 </svg>
                 zkSync Checkout
               </button>
-    
+
               <!-- Modal shown when clicking button -->
               <b-modal
                 id="zksync-modal" :visible="zksync.showModal"
@@ -407,7 +407,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </template>
-    
+
                 <!-- Main content -->
                 <template v-slot:default="{ hide }">
                   <div class="px-4 pb-4">
@@ -416,7 +416,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
                       <img src="{% static 'v2/images/grants/zksync.svg' %}" alt="zkSync Logo" width="150">
                       <h1 class="font-weight-bold mt-2">Pay with zkSync</h1>
                     </div>
-    
+
                     <!-- If checkout not started -->
                     <div v-if="zksync.checkoutStatus === 'not-started'">
                       <p>
@@ -439,7 +439,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
                         </div>
                       </small>
                     </div>
-    
+
                     <!-- If checkout is pending -->
                     <div v-else-if="zksync.checkoutStatus === 'pending'">
                       <div class="text-center mb-3 h4 pt-0">
@@ -447,12 +447,12 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
                       </div>
                       <p>Checkout in progress. Please complete the checkout process on the zkSync website.</p>
                     </div>
-    
+
                     <!-- Shared warning -->
                     <div class="mt-2 p-2 text-left bg-warning w-100 border rounded">
                       <div class="font-weight-bold">IMPORTANT: Do not close this tab or the zkSync tab until your transfers are complete!</div>
                     </div>
-    
+
                     <!-- If checkout not started -->
                     <div v-if="zksync.checkoutStatus === 'not-started'" class="text-center pt-4">
                       <button @click="checkoutWithZksync" class="btn btn-gc-blue shadow-none">
